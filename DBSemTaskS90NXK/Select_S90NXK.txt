@@ -1,0 +1,21 @@
+select nev from Tanar where egyetem='ELTE'
+select nev from Targy where hossz=45
+select count(*) from diak join tanar using(T_ID) where Tanar.nev='Péch Antal'
+select avg(hossz) from Targy
+select Targy.nev from Felvette inner join Diak using(D_id) inner join Targy using(O_ID) where Diak.nev='Tánczos Gergely'
+select Diak.nev from Felvette inner join Diak using(D_id) inner join Targy using(O_ID) where Targy.nev='matematika'
+select nev, count(V_id) from diak left join megnyert_versenyek using(D_id) group by nev order by count(V_id) DESC
+select Tanar.nev, count(D_id) from diak left join Tanar using(T_id) group by Tanar.nev order by count(D_id)
+select Targy.nev, count(O_id) from Felvette join Targy using(O_id) group by Targy.nev
+select max(count(S_id)) from Tanar group by S_id
+select nev from diak where T_id in (select T_id from Tanar where egyetem='ELTE');
+select Tanar.nev from Diak join Tanar using(T_id) where D_id in (select D_id from Megnyert_versenyek join Versenyek using(V_id) where V_nev = 'Ki mit tud?!')
+select nev, floor((sysdate-szüldat)/365) from diak
+select V_nev from Megnyert_versenyek join versenyek using(V_id) where D_id in (select D_id from Diak left join Iskola using(S_id) join Felvette using(D_ID) where Iskola.nev='Selmeci Akadémia' and T_id in (select T_id from Tanar where nev='Péch Antal') and O_id in (select O_id from Targy where nev='informatika'))
+
+
+
+
+
+
+

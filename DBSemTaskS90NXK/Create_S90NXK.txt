@@ -1,0 +1,37 @@
+create table Targy(
+O_id int primary key, hossz int,
+nev varchar(20)
+);
+
+create table Iskola( S_id int primary key, alap_ev int, ny_osztalyos int
+);
+
+create table Tanar(
+T_id int primary key, nev varchar(30), egyetem varchar(20), kepzes varchar(20), O_id int,
+S_id int,
+foreign key (O_id) references Targy(O_id), foreign key (S_id) references Iskola(S_id)
+);
+
+create table diak(
+D_id int primary key, nev varchar(30), szüldat date,
+S_id int, T_id int,
+foreign key(S_id) references Iskola(S_id), foreign key (T_id) references Tanar(T_id)
+);
+
+create table versenyek( V_id int primary key, V_nev varchar(30)
+);
+
+create table versenyek2( D_id int,
+V_id int,
+primary key(D_id, V_id),
+foreign key(D_id) references Diak(D_id),
+ 
+
+foreign key(V_id) references versenyek(V_id)
+);
+
+create Table felvette( D_id int,
+O_id int,
+primary key(D_id, O_id),
+foreign key (D_id) references Diak(D_id), foreign key (O_id) references Targy(O_id)
+)
